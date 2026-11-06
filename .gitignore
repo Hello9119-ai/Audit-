@@ -1,0 +1,9 @@
+# Ignore loose raw source scripts to protect forensic signatures and detection logic
+Audit.ps1
+Audit.cs
+Build_Audit_EXE.bat
+Run_Audit.bat
+Audit_Mac
+Audit_Mac.command
+Audit.app/
+.DS_Store
