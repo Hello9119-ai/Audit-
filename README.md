@@ -15,9 +15,9 @@ Official cross-platform proctoring forensic audit toolset for Windows and macOS.
 
 The tool performs local, read-only system forensic checks across 5 core compliance areas:
 
-1. **Screen Mirroring / Display Cloning**: Detects active duplicate coordinate clones, virtual display drivers, and HDMI capture dongles.
-2. **Remote Screen Share / Control Session**: Identifies active or recorded remote desktop sessions (Apple Screen Sharing, Windows RDP, AnyDesk, TeamViewer) with exact start/end timestamps and total duration.
-3. **Live AI Windows Open Right Now**: Checks for active foreground AI solver windows (ChatGPT, Gemini, Claude, DeepSeek).
-4. **AI Website / Solver Visited**: Analyzes browser history timelines with exact timestamps, dwell time, user account email, and specific problem/chat URLs.
+1. **Screen Mirroring / Display Cloning**: Detects active duplicate coordinate clones, virtual display drivers, and hardware HDMI capture dongles.
+2. **Actual Screen Share / Remote Control Session**: Detects confirmed active or logged screen sharing sessions (**AirPlay, Apple Screen Sharing / VNC, FaceTime / Messages SharePlay, AnyDesk, TeamViewer, Zoom CptHost, and WebRTC browser streaming**) with exact start/end timestamps, total duration, and remote partner/client proof.
+3. **Screen Overlay & Laser Pointer Detection**: Identifies virtual laser pointer or cursor highlighting tools (e.g. Presentify, CursorPro, ProMouse) that render moving red dots or screen overlays.
+4. **AI Website / Solver Visited & Extensions**: Analyzes browser history timelines with exact timestamps, dwell time, user account email, and specific problem/chat URLs. Audits browser extensions for sideloaded test-cheating tools.
 5. **Browser History Wiped / Tampered**: Recovers deleted AI visits from the Omnibox shortcut cache.
 
