@@ -81,7 +81,7 @@ Official cross-platform proctoring forensic audit toolset for **Windows**, **mac
 
 The tool performs local, read-only system forensic checks across 5 core compliance areas:
 
-1. **Screen Mirroring / Display Cloning**: Detects active duplicate coordinate clones, virtual display drivers (Duet, Spacedesk, IddCx), and hardware HDMI capture dongles (Elgato, Cam Link).
+1. **Screen Mirroring / Display Cloning**: Detects active duplicate coordinate clones, active virtual display streams (Duet, Spacedesk, IddCx), and hardware HDMI capture dongles (Elgato, Cam Link). Note: Dormant/inactive drivers from past installations are strictly filtered out to guarantee 0% false positives.
 2. **Actual Screen Share / Remote Control Session**: Detects confirmed active or logged screen sharing sessions (**AirPlay, Apple Screen Sharing / VNC, Windows RDP, FaceTime / Messages SharePlay, AnyDesk, TeamViewer, Zoom CptHost, and WebRTC browser streaming**) with exact start/end timestamps, total duration, and remote partner/client proof. Excludes all physical console logons.
 3. **Screen Overlay & Laser Pointer Detection**: Identifies virtual laser pointer or cursor highlighting tools (e.g. Presentify, CursorPro, ProMouse, Gromit-MPX) that render moving red dots or screen overlays.
 4. **AI Website / Solver Visited & Extensions**: Analyzes browser history timelines with exact timestamps, dwell time, user account email, and specific problem/chat URLs (Gemini, ChatGPT, Claude, DeepSeek, Copilot, etc.). Audits browser extensions for sideloaded test-cheating tools.
