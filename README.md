@@ -77,12 +77,15 @@ Official cross-platform proctoring forensic audit toolset for **Windows**, **mac
 
 ---
 
-## 🔍 Invigilator 5-Second Checklist
+## 🔍 Forensic Capabilities & Anti-Tamper Matrix
 
-The tool performs local, read-only system forensic checks across 5 core compliance areas:
+The audit suite executes local, read-only system forensic checks across 6 core compliance areas:
 
 1. **Screen Mirroring / Display Cloning**: Detects active duplicate coordinate clones, active virtual display streams (Duet, Spacedesk, IddCx), and hardware HDMI capture dongles (Elgato, Cam Link). Note: Dormant/inactive drivers from past installations are strictly filtered out to guarantee 0% false positives.
 2. **Actual Screen Share / Remote Control Session**: Detects confirmed active or logged screen sharing sessions (**AirPlay, Apple Screen Sharing / VNC, Windows RDP, FaceTime / Messages SharePlay, AnyDesk, TeamViewer, Zoom CptHost, and WebRTC browser streaming**) with exact start/end timestamps, total duration, and remote partner/client proof. Excludes all physical console logons.
-3. **Screen Overlay & Laser Pointer Detection**: Identifies virtual laser pointer or cursor highlighting tools (e.g. Presentify, CursorPro, ProMouse, Gromit-MPX) that render moving red dots or screen overlays.
-4. **AI Website / Solver Visited & Extensions**: Analyzes browser history timelines with exact timestamps, dwell time, user account email, and specific problem/chat URLs (Gemini, ChatGPT, Claude, DeepSeek, Copilot, etc.). Audits browser extensions for sideloaded test-cheating tools.
-5. **Browser History Wiped / Tampered**: Recovers deleted AI visits from the internal Omnibox shortcut cache.
+3. **Screen Recording & Deleted Capture Files**: Detects running screen recorders (OBS Studio, Xbox Game Bar DVR, Steps Recorder, QuickTime, Bandicam, Camtasia, Snagit, Loom, Kazam, SimpleScreenRecorder), captures video files created during the assessment window (`.mp4`, `.mov`, `.mkv`), and recovers video/log files deleted to the **Windows Recycle Bin**, **macOS Trash (`~/.Trash`)**, and **Linux Trash**.
+4. **Log Tampering & Event Clearing Detection**: Flags if Windows Security or System Event Logs were purged or cleared during the exam window (**Windows Event IDs 1102 & 104**), detecting automated or manual log destruction.
+5. **Multi-Layer History Deletion & Tampering Recovery**:
+   * **Omnibox Cache Recovery**: Recovers deleted AI visits from the internal browser autocomplete cache (`Shortcuts` SQLite database).
+   * **Session Cookie Forensics**: Correlates persistent encrypted browser cookie access timestamps (`Cookies` SQLite database) against wiped history. Even if a candidate clicks "Clear Browsing Data", persistent session cookies prove the exact second the AI domain was accessed.
+6. **Live Open Tabs & Extensions**: Detects live foreground/background tabs open on AI domains or problem solver sites, and scans for sideloaded interview-cheating browser extensions.
