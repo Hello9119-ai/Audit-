@@ -8,5 +8,6 @@ Audit_Mac.command
 Audit.command
 Audit.app/
 Audit.exe
+Audit_Linux
 .DS_Store
 
