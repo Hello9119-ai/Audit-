@@ -5,6 +5,7 @@ Build_Audit_EXE.bat
 Run_Audit.bat
 Audit_Mac
 Audit_Mac.command
+Audit.command
 Audit.app/
 Audit.exe
 .DS_Store

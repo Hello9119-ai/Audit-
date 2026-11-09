@@ -6,8 +6,8 @@ Official cross-platform proctoring forensic audit toolset for Windows and macOS.
 
 | Platform | Download Package | Quick Instructions |
 | :--- | :--- | :--- |
-| **Windows** | [📥 **Download `Audit_Windows.zip`**](https://github.com/Hello9119-ai/Audit-/raw/main/Audit_Windows.zip) | 1. Extract `Audit_Windows.zip`<br>2. Double-click **`Audit.exe`**<br>3. Press **Enter** for default 2-hour audit |
-| **macOS** | [📥 **Download `Audit_Mac.zip`**](https://github.com/Hello9119-ai/Audit-/raw/main/Audit_Mac.zip) | 1. Extract `Audit_Mac.zip`<br>2. Double-click **`Audit.app`** (or run `./Audit_Mac` in Terminal)<br>3. Press **Enter** for default 2-hour audit |
+| **Windows** | [📥 **Download `Audit_Windows.zip`**](https://github.com/Hello9119-ai/Audit-/raw/main/Audit_Windows.zip) | 1. Extract `Audit_Windows.zip`<br>2. Double-click **`Audit.exe`**<br>3. Enter hours (or press **Enter** for default: 2) |
+| **macOS** | [📥 **Download `Audit_Mac.zip`**](https://github.com/Hello9119-ai/Audit-/raw/main/Audit_Mac.zip) | 1. Extract `Audit_Mac.zip`<br>2. Double-click **`Audit.command`** (or `Audit.app`)<br>3. Enter hours (or press **Enter** for default: 2) |
 
 ---
 
