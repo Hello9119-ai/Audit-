@@ -8,7 +8,7 @@ Official cross-platform proctoring forensic audit toolset for **Windows**, **mac
 
 | Platform | Download Package | Quick Instructions |
 | :--- | :--- | :--- |
-| **Windows** | [📥 **Download `Audit_Windows.zip`**](https://github.com/Hello9119-ai/Audit-/raw/main/Audit_Windows.zip) | 1. Extract `Audit_Windows.zip`<br>2. Double-click **`Audit.exe`**<br>3. Enter hours (or press **Enter** for default: 2) |
+| **Windows** | [📥 **Download `Audit_Windows.zip`**](https://github.com/Hello9119-ai/Audit-/raw/main/Audit_Windows.zip) | 1. Extract `Audit_Windows.zip`<br>2. Double-click **`Audit.exe`** (or **`Run_Audit.bat`** if Smart App Control is enabled)<br>3. Enter hours (or press **Enter** for default: 2) |
 | **macOS** | [📥 **Download `Audit_Mac.zip`**](https://github.com/Hello9119-ai/Audit-/raw/main/Audit_Mac.zip) | 1. Extract `Audit_Mac.zip`<br>2. Double-click **`Audit.command`** (or `Audit.app`)<br>3. Enter hours (or press **Enter** for default: 2) |
 | **Linux** | [📥 **Download `Audit_Linux.zip`**](https://github.com/Hello9119-ai/Audit-/raw/main/Audit_Linux.zip) | 1. Extract `Audit_Linux.zip`<br>2. Run `./Audit_Linux` in Terminal (`chmod +x Audit_Linux`)<br>3. Enter hours (or press **Enter** for default: 2) |
 
@@ -37,20 +37,22 @@ Official cross-platform proctoring forensic audit toolset for **Windows**, **mac
 #### ⚠️ "Smart App Control blocked an app that may be unsafe" or "Windows protected your PC"
 * **Why this happens**: Windows 11 Smart App Control (SAC) blocks newly downloaded unsigned `.exe` files if they carry the browser's internet download tag (*Mark of the Web* / `:Zone.Identifier`), or if double-clicked directly from inside the `.zip` without extracting.
 * **Resolution (Choose one)**:
-  1. **Unblock the Zip (Recommended)**:
-     * Right-click the downloaded **`Audit_Windows.zip`** file.
-     * Click **Properties**.
+  1. **Instant 1-Click Launch (Recommended)**:
+     * Simply double-click **`Run_Audit.bat`** included right next to `Audit.exe`.
+     * `Run_Audit.bat` automatically unblocks the Smart App Control tag and executes the audit smoothly.
+  2. **Unblock the Zip File**:
+     * Right-click the downloaded **`Audit_Windows.zip`** file &rarr; click **Properties**.
      * At the bottom, check the box labeled **"Unblock"** and click **Apply** / **OK**.
      * Now extract the zip and double-click **`Audit.exe`**.
-  2. **Extract Before Running**:
+  3. **Extract Before Running**:
      * Do **NOT** double-click `Audit.exe` directly inside the compressed folder view.
-     * Right-click `Audit_Windows.zip` &rarr; click **Extract All...** &rarr; open the extracted folder and run `Audit.exe`.
-  3. **PowerShell 1-Line Unblock**:
-     * Open PowerShell in the folder and run:
+     * Right-click `Audit_Windows.zip` &rarr; click **Extract All...** &rarr; open the extracted folder and run `Audit.exe` (or `Run_Audit.bat`).
+  4. **PowerShell 1-Line Unblock**:
+     * Open PowerShell in the extracted folder and run:
        ```powershell
        Unblock-File .\Audit.exe; .\Audit.exe
        ```
-  4. **Smart App Control Setting (If strictly enforced)**:
+  5. **Smart App Control Setting (If strictly enforced)**:
      * Open **Windows Security** &rarr; **App & browser control** &rarr; **Smart App Control settings** &rarr; turn **Off**.
 
 #### ⚠️ Script Exited Immediately / No Checks Were Run
@@ -109,5 +111,8 @@ The audit suite executes local, read-only system forensic checks across 6 core c
 4. **Log Tampering & Event Clearing Detection**: Flags if Windows Security or System Event Logs were purged or cleared during the exam window (**Windows Event IDs 1102 & 104**), detecting automated or manual log destruction.
 5. **Multi-Layer History Deletion & Tampering Recovery**:
    * **Omnibox Cache Recovery**: Recovers deleted AI visits from the internal browser autocomplete cache (`Shortcuts` SQLite database).
-   * **Session Cookie Forensics**: Correlates persistent encrypted browser cookie access timestamps (`Cookies` SQLite database) against wiped history. Even if a candidate clicks "Clear Browsing Data", persistent session cookies prove the exact second the AI domain was accessed.
+   * **Session Cookie Forensics & Exact Active Duration Reconstruction**: Correlates persistent encrypted browser cookie access timestamps (`Cookies` SQLite database) and persistent session stores (`Sessions\Session_*`) against wiped history. Even if a candidate clicks "Clear Browsing Data" or closes the tab right before submission, the engine calculates `creation_utc` (first opened) and `last_access_utc` (closed/wiped) to reconstruct the exact time period the tool was used:
+     * **Start Time & End Time**: Reports the exact seconds when engagement began and ended (e.g. `Used from 18:43:20 to 18:44:59`).
+     * **Active Dwell Duration**: Displays the verified duration of cheating (e.g. `Duration: 1m 39s`).
+     * **Explicit Tamper Tag**: Clearly labels the incident in both the invigilator evidence dossier and the merged timeline as `[DELETED FROM HISTORY]`, proving both the cheating tool access and the intentional deletion attempt.
 6. **Live Open Tabs & Extensions**: Detects live foreground/background tabs open on AI domains or problem solver sites, and scans for sideloaded interview-cheating browser extensions.
